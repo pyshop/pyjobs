@@ -1,2 +1,1 @@
-# pyjobs
-Source code of pyjobs.ru
+See docs/developer_guide.rst for getting started.

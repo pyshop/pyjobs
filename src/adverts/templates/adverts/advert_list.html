@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Вакансии{% endblock %}
+
+{% block content %}
+    {% for advert in advert_list %}
+        <div class="advert">
+            <h2>{{ advert.title }}</h2>
+            <p>{{ advert.description }}</p>
+            <p><a href="{% url 'advert-detail' advert.pk %}">подробнее...</a></p>
+        </div>
+    {% empty %}
+        <p>Нет ни одной активной вакансии.</p>
+    {% endfor %}
+{% endblock %}

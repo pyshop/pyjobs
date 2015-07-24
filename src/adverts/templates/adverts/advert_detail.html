@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Вакансия "{{ advert.title }}"{% endblock %}
+
+{% block content %}
+    <h2>{{ advert.title }}</h2>
+    <p>{{ advert.description }}</p>
+
+    <p>Автор: {{ advert.author }}</p>
+    <p>Дата изменения: {{ advert.modified }}</p>
+    <p><a href="{% url 'advert-detail' advert.pk %}">подробнее...</a></p>
+{% endblock %}
