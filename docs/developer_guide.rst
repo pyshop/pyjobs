@@ -30,6 +30,7 @@ Now you can run development server:
 
     python src/manage.py runserver_plus localhost:8010
 
-Your app will be available in http://localhost:8010 and django's admin interface in http://localhost:8010/admin.
+Your app will be available in http://localhost:8010 and django's admin interface in http://localhost:8010/admin
+Use user/user123 to login to django's admin interface.
 
 Congratulations! You have your own development environment.
