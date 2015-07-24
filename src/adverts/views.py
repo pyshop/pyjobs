@@ -16,3 +16,7 @@ class AdvertList(ListView):
 
 class AdvertDetail(DetailView):
     model = models.Advert
+
+
+class Conditions(TemplateView):
+    template_name = 'adverts/conditions.html'
