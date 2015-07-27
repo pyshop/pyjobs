@@ -30,7 +30,13 @@ class Advert(TimeStampedModel):
     title = models.CharField(verbose_name='название вакансии', max_length=127, blank=False,
                              help_text='краткое описание отражающее суть вакансии')
     description = models.TextField(verbose_name='описание вакансии', blank=True)
+    requirements = models.TextField(verbose_name='требования к соискателю', blank=True)
+    salary = models.CharField(verbose_name='зарплата', max_length=50, blank=False,
+                             help_text='до пятидесяти символов', default='')
+    city = models.CharField(verbose_name='город', max_length=50, blank=False,
+                            help_text='название города', default='')
     author = models.ForeignKey(User, verbose_name='автор вакансии', blank=True)
+
 
     def __str__(self):
         return self.title

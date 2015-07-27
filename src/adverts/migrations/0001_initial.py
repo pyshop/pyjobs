@@ -51,6 +51,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(verbose_name='название заявки', help_text='краткое описание отражающее суть заявки', max_length=127)),
                 ('description', models.TextField(verbose_name='описание запроса', blank=True)),
                 ('author', models.ForeignKey(blank=True, verbose_name='автор заявки', to=settings.AUTH_USER_MODEL)),
+
             ],
             options={
                 'get_latest_by': 'modified',
