@@ -20,3 +20,7 @@ class AdvertDetail(DetailView):
 
 class Conditions(TemplateView):
     template_name = 'adverts/conditions.html'
+
+
+class Registration(TemplateView):
+    template_name = 'adverts/registration.html'
