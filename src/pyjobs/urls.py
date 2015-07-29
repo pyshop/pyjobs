@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^about/$', views.AboutUs.as_view(), name='about-us'),
 	url(r'^conditions/$', views.Conditions.as_view(), name='conditions'),
     url(r'^registration/$', views.Registration.as_view(), name='registration'),
+    url(r'^newadvert/$', views.NewAdvert.as_view(), name='newadvert'),
+    url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 

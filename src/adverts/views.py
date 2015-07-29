@@ -24,3 +24,8 @@ class Conditions(TemplateView):
 
 class Registration(TemplateView):
     template_name = 'adverts/registration.html'
+
+
+class NewAdvert(TemplateView):
+    template_name = 'adverts/newadvert.html'
+
