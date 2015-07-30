@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <h1>Новая вакансия</h1>
+    <form action="{% url 'advert-add' %}" method="post">{% csrf_token %}
+        {% for field in form %}
+<fieldset class="control-group">
+    <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+    <div class="controls">
+        {{ field }}
+        <p class="help-text">{{ field.help_text }} </p>
+    </div>
+</fieldset>
+{% endfor %}
+        <input class="btn btn-success" type="submit" value="Добавить!" />
+    </form>
+
+{% endblock %}
