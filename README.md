@@ -1,1 +1,1 @@
-See [Developers guide at GitHub](/developer_guide.md) for getting started.
+See [Developers guide at GitHub](/docs/developer_guide.md) for getting started.
