@@ -6,6 +6,6 @@
     <h2>{{ advert.title }}</h2>
     <p>{{ advert.description }}</p>
 
-    <p>Автор: {{ advert.author }}</p>
+    <p>Автор: {% if advert.author %} {{ advert.author }} {% else %} Не зарегистрировался {% endif %}</p>
     <p>Дата изменения: {{ advert.modified }}</p>
 {% endblock %}

@@ -35,7 +35,7 @@ class Advert(TimeStampedModel):
                              help_text='до пятидесяти символов', default='')
     city = models.CharField(verbose_name='город', max_length=50, blank=False,
                             help_text='название города', default='')
-    author = models.ForeignKey(User, verbose_name='автор вакансии', blank=True)
+    author = models.ForeignKey(User, verbose_name='автор вакансии', blank=True, null=True)
 
 
     def __str__(self):
@@ -44,3 +44,5 @@ class Advert(TimeStampedModel):
     @models.permalink
     def get_absolute_url(self):
         return 'advert-detail', (self.pk,)
+
+

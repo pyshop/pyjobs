@@ -29,4 +29,11 @@ class Registration(TemplateView):
 
 class AdvertCreate(CreateView):
     model = models.Advert
-    fields = ('title', 'description', 'requirements', 'salary', 'city', 'author')
+    fields = ('title', 'description', 'requirements', 'salary', 'city')
+
+    def form_valid(self, form):
+        if self.request.user.is_anonymous():
+            form.instance.author = None
+        else:
+            form.instance.author = self.request.user
+        return super(AdvertCreate, self).form_valid(form)
