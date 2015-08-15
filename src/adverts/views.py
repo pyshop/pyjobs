@@ -37,3 +37,7 @@ class AdvertCreate(CreateView):
         else:
             form.instance.author = self.request.user
         return super(AdvertCreate, self).form_valid(form)
+
+
+class Login(TemplateView):
+    template_name = 'registration/login.html'

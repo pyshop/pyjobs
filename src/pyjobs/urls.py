@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'author/add/$', views.AdvertCreate.as_view(), name='advert-add'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$', views.Login.as_view(), name='login')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

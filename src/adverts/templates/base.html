@@ -29,6 +29,7 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
+                <li><a href="{% url 'login' %}">Войти</a></li>
                 <li><a href="{% url 'home' %}">Список вакансий</a></li>
                 <li><a href="{% url 'advert-add' %}">Новая вакансия</a></li>
 				<li><a href="{% url 'conditions' %}">Условия</a></li>
@@ -54,9 +55,12 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12 page-content">
+            <div class="col-md-6 page-content">
                 {% block content %}
                 {% endblock %}
+            </div>
+            <div class="col-md-6">
+                <p>Добро пожаловать на ПайДжобс! Здесь будет баннер, немного текста и ссылка.</p>
             </div>
         </div>
         <!--/span-->
