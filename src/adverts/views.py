@@ -3,6 +3,7 @@ from django.views.generic import View, FormView, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
 
 from adverts import models
 
@@ -37,6 +38,19 @@ class AdvertCreate(CreateView):
         else:
             form.instance.author = self.request.user
         return super(AdvertCreate, self).form_valid(form)
+
+
+class RegistrationForm(FormView):
+    form_class = UserCreationForm
+
+    success_url = '/admin/'
+
+    template_name = 'adverts/registration.html'
+
+    def form_valid(self, form):
+        form.save()
+
+        return super(RegistrationForm, self).form_valid(form)
 
 
 class Login(TemplateView):
