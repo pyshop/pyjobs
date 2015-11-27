@@ -37,7 +37,6 @@ class Advert(TimeStampedModel):
                             help_text='название города', default='')
     author = models.ForeignKey(User, verbose_name='автор вакансии', blank=True, null=True)
 
-
     def __str__(self):
         return self.title
 
@@ -46,3 +45,17 @@ class Advert(TimeStampedModel):
         return 'advert-detail', (self.pk,)
 
 
+class UserRegistration(models.Model):
+    username = models.CharField(blank=False, max_length=28, help_text='имя пользователя')
+    password = models.CharField(blank=False, max_length=60, help_text='пароль')
+
+    def __str__(self):
+        return self.title
+
+
+class UserLogin(models.Model):
+    username = models.CharField(blank=False, max_length=28, help_text='имя пользователя')
+    password = models.CharField(blank=False, max_length=60, help_text='пароль')
+
+    def __str__(self):
+        return self.title

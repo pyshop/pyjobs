@@ -24,8 +24,10 @@ class Conditions(TemplateView):
     template_name = 'adverts/conditions.html'
 
 
-class Registration(TemplateView):
+class Registration(CreateView):
     template_name = 'adverts/registration.html'
+    model = models.UserRegistration
+    fields = ('username', 'password')
 
 
 class AdvertCreate(CreateView):
@@ -40,18 +42,7 @@ class AdvertCreate(CreateView):
         return super(AdvertCreate, self).form_valid(form)
 
 
-class RegistrationForm(FormView):
-    form_class = UserCreationForm
-
-    success_url = '/admin/'
-
-    template_name = 'adverts/registration.html'
-
-    def form_valid(self, form):
-        form.save()
-
-        return super(RegistrationForm, self).form_valid(form)
-
-
-class Login(TemplateView):
+class Login(CreateView):
     template_name = 'registration/login.html'
+    model = models.UserLogin
+    fields = ('username', 'password')
