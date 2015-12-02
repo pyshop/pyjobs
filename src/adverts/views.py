@@ -3,7 +3,6 @@ from django.views.generic import View, FormView, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
 
 from adverts import models
 
@@ -27,7 +26,7 @@ class Conditions(TemplateView):
 class Registration(CreateView):
     template_name = 'adverts/registration.html'
     model = models.UserRegistration
-    fields = ('username', 'password')
+    fields = ('username', 'password1', 'password2', 'email', 'phone')
 
 
 class AdvertCreate(CreateView):
