@@ -46,34 +46,16 @@ class Advert(TimeStampedModel):
         return 'advert-detail', (self.pk,)
 
 
-class UserRegistration(models.Model):
-    username = models.CharField(blank=False, max_length=28,
-                                verbose_name='имя пользователя', help_text='используется дла входа на сайт')
-    password1 = models.CharField(blank=False, max_length=60,
-                                verbose_name='пароль', help_text='сложный и безопасный')
-    password2 = models.CharField(blank=False, max_length=60, verbose_name='пароль еще раз', help_text='пароль еще раз для проверки')
-    email = models.CharField(blank=False, max_length=60, verbose_name='электропочта', help_text='электропочта обязательное поле')
-    phone = models.CharField(blank=True, max_length=60, verbose_name='телефон', help_text='в любом формате')
-
-    def __str__(self):
-        return self.title
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError(
-                self.error_messages['password_mismatch'],
-                code='password_mismatch',
-            )
-        return password2
-
-    def save(self, commit=True):
-        user = super(UserRegistration, self).save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
-            user.save()
-        return user
+#class UserRegistration(models.Model):
+#    username = models.CharField(blank=False, max_length=28,
+#                                verbose_name='имя пользователя', help_text='используется дла входа на сайт')
+#    password = models.CharField(blank=False, max_length=60,
+#                                verbose_name='пароль', help_text='сложный и безопасный')
+#    email = models.CharField(blank=False, max_length=60, verbose_name='электропочта', help_text='электропочта обязательное поле', default='SOME STRING')
+#    phone = models.CharField(blank=True, max_length=60, verbose_name='телефон', help_text='в любом формате')
+#
+#    def __str__(self):
+#        return self.title
 
 
 class UserLogin(models.Model):
