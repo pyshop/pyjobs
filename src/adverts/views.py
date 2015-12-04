@@ -62,10 +62,10 @@ def advert_create(request):
             pass
     else:
         form = AdvertForm()
-    return render(request, 'adverts/advert_form.html', {'form': AdvertForm})
+    return render(request, 'adverts/advert_form.html', {'form': form})
 
 
-def reg_view(request):
+def registration_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST or None)
         if form.is_valid():
@@ -75,11 +75,11 @@ def reg_view(request):
             pass
     else:
         form = UserRegistrationForm()
-    return render(request, 'adverts/registration.html', {'form': UserRegistrationForm})
+    return render(request, 'adverts/registration.html', {'form': form})
 
 
-def log_view(request):
-    form = UserLoginForm
+def login_view(request):
+    form = UserLoginForm()
     if form.is_valid():
         return render(request, '/', {})
     else:

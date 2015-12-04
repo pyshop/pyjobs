@@ -10,11 +10,11 @@ urlpatterns = [
     url(r'^advert/(?P<pk>\d+)/$', views.AdvertDetail.as_view(), name='advert-detail'),
     url(r'^about/$', views.AboutUs.as_view(), name='about-us'),
     url(r'^conditions/$', views.Conditions.as_view(), name='conditions'),
-    url(r'^registration/$', views.reg_view, name='registration'),
+    url(r'^registration/$', views.registration_view, name='registration'),
     url(r'author/add/$', views.advert_create, name='advert-add'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', views.log_view, name='login')
+    url(r'^login/$', views.login_view, name='login')
     ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
