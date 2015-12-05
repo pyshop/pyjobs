@@ -70,7 +70,7 @@ def registration_view(request):
 def login_view(request):
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
-        user = authenticate(email=request.POST['email'], password=request.POST['password'])
+        user = authenticate(username=request.POST['username'], password=request.POST['password'])
         login(request, user)
         return HttpResponseRedirect(reverse('conditions'))
     return render(request, 'registration/login.html', {'form': form})
