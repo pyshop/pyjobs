@@ -6,14 +6,12 @@
 <p>Что-то пошло не так. Попробуйте еще раз.</p>
 {% endif %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Залогиньтесь.</p>
-    {% else %}
-    <p>Залогиньтесь.</p>
-    {% endif %}
-{% endif %}
 
+    {% if user.is_authenticated %}
+    <h1>Ю АЛРЕДИ ЛОГГЕД ИН</h1>
+    {% endif %}
+
+{% if user.is_anonymous %}
 <div class="container">
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
     <h1>Войти:</h1>
@@ -24,8 +22,6 @@
     <a href="{% url 'password_reset' %}">Амнезия?</a>
 </form>
 </div>
-
+{% endif %}
 
 {% endblock %}
-
-

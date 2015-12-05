@@ -46,7 +46,7 @@ class Advert(TimeStampedModel):
         return 'advert-detail', (self.pk,)
 
 
-#class UserRegistration(models.Model):
+# class UserRegistration(models.Model):
 #    username = models.CharField(blank=False, max_length=28,
 #                                verbose_name='имя пользователя', help_text='используется дла входа на сайт')
 #    password = models.CharField(blank=False, max_length=60,
@@ -58,9 +58,9 @@ class Advert(TimeStampedModel):
 #        return self.title
 
 
-class UserLogin(models.Model):
-    username = models.CharField(blank=False, max_length=28, help_text='имя пользователя')
-    password = models.CharField(blank=False, max_length=60, help_text='пароль')
-
-    def __str__(self):
-        return self.title
+# class UserLogin(models.Model):
+#     username = models.CharField(blank=False, max_length=28, help_text='имя пользователя')
+#     password = models.CharField(blank=False, max_length=60, help_text='пароль')
+#
+#     def __str__(self):
+#         return self.title
