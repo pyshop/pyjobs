@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^registration/$', views.registration_view, name='registration'),
     url(r'author/add/$', views.advert_create, name='advert-add'),
     url(r'^login/$', views.login_view, name='login'),
-    url(r'^userprofile/$', views.UserProfilesViews.as_view(), name='profile'),
+    url(r'^userprofile/$', views.edit_user_profiles_view, name='profile'),
     url(r'^logout/$', views.logout_view, name='logout2'), #  для кастомизации нужно вызывать раньше, чем ауф.юрлс
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),

@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.views.generic import View, FormView, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .forms import UserRegistrationForm, AdvertForm, UserLoginForm
+from .forms import UserRegistrationForm, AdvertForm, UserLoginForm, EditUsersProfilesForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout  # its core of authentication and defaults models
@@ -24,31 +24,6 @@ class AdvertDetail(DetailView):
 
 class Conditions(TemplateView):
     template_name = 'adverts/conditions.html'
-
-
-# Comment this because we need to use new Form Based Views
-# class Registration(CreateView):
-#    template_name = 'adverts/registration.html'
-#    model = models.UserRegistration
-#    fields = ('username', 'password', 'email', 'phone')
-
-
-# class AdvertCreate(CreateView):
-#    model = models.Advert
-#    fields = ('title', 'description', 'requirements', 'salary', 'city')
-
-#    def form_valid(self, form):
-#        if self.request.user.is_anonymous():
-#            form.instance.author = None
-#        else:
-#            form.instance.author = self.request.user
-#        return super(AdvertCreate, self).form_valid(form)
-
-
-# class Login(CreateView):
-#    template_name = 'registration/login.html'
-#    model = models.UserLogin
-#    fields = ('username', 'password')
 
 
 def advert_create(request):
@@ -81,5 +56,14 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('home'))
 
 
-class UserProfilesViews(TemplateView):
-    template_name = 'adverts/userprofile.html'
+def edit_user_profiles_view(request):
+    user = request.user #пользователь для изменения = запросить пользователя
+    form = EditUsersProfilesForm(request.POST or None) #форма из формс.пай
+    if form.is_valid(): #если форма валидна
+        user.first_name = request.POST['first_name'] #first_name объекта юзер изменяется на то что поучаем в ПОСТ
+        user.last_name = request.POST['last_name']
+        user.email = request.POST['email']
+        user.phone = request.POST['phone']
+        user.save()
+        return HttpResponseRedirect(reverse('profile'))
+    return render(request, 'adverts/userprofile.html', {'form': form})

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Advert, User
+from .models import Advert, User, UsersProfiles
 #http://djbook.ru/examples/19/ форму UserLoginForm сделал по этому примеру
 from django.utils.translation import ugettext as _ # это функция указывающая переводимую строку подробнее тут http://djbook.ru/rel1.5/topics/i18n/translation.html
 
@@ -37,3 +37,10 @@ class UserRegistrationForm(forms.ModelForm):
 class UserLoginForm(forms.Form):  # сырая форма
     username = forms.CharField(label=_(u'Username'), max_length=30)  # поле формы, аттрибут "лейбл" будет локализирован при возможности
     password = forms.CharField(label=_(u'Password'), widget=forms.PasswordInput)
+
+
+class EditUsersProfilesForm(forms.Form):
+    first_name = forms.CharField(label=_(u'first name'), max_length=30)
+    last_name = forms.CharField(label=_(u'last name'), max_length=30)
+    email = forms.CharField(label=_(u'mail'), max_length=30)
+    phone = forms.CharField(label=_(u'phone'), max_length=30)

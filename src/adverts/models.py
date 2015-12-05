@@ -48,7 +48,6 @@ class Advert(TimeStampedModel):
 
 class UsersProfiles(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL) # подробно на русском тут http://habrahabr.ru/post/74967/
-    homepage = models.URLField()
 
     def __str__(self):
         return self.title

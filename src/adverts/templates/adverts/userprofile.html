@@ -3,16 +3,27 @@
 {% block title %}Профайл пользователя{% endblock %}
 
 {% block content %}
-
-<div id="container">
-    <h1 class="">Профайл</h1>
+{% if user.is_anonymous %}
+<h2>Необходимо залогиниться</h2>
+{% endif %}
+{% if user.is_authenticated %}
+<div class="container">
     <div>
-        <p>{{ user.username }}</p>
-        <p>{{ user.email }}</p>
-        <p>{{ user.first_name }}</p>
-        <p>{{ user.last_name }}</p>
-        <p>{{ user.phone }}</p>
+        <h1 class="">Профайл</h1>
+        <p>Имя пользователя: {{ user.username }}</p>
+        <p>Электропочта: {{ user.email }}</p>
+        <p>Имя: {{ user.first_name }}</p>
+        <p>Фамилия: {{ user.last_name }}</p>
+        <p>Телефон: {{ user.phone }}</p>
+    </div>
+    <div class="container">
+        <h1>Редактировать</h1>
+        <form method="POST" action="" class="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Изменить</button>
+        </form>
     </div>
 </div>
-
+{% endif %}
 {% endblock %}
