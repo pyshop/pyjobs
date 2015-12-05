@@ -138,3 +138,4 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = 'adverts.User'
+AUTH_PROFILE_MODULE = 'accounts.UsersProfiles'

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Профайл пользователя{% endblock %}
+
+{% block content %}
+
+<div id="container">
+    <h1 class="">Профайл</h1>
+    <div>
+        <p>{{ user.username }}</p>
+        <p>{{ user.email }}</p>
+        <p>{{ user.first_name }}</p>
+        <p>{{ user.last_name }}</p>
+        <p>{{ user.phone }}</p>
+    </div>
+</div>
+
+{% endblock %}

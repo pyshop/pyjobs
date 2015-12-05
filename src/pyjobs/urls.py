@@ -12,9 +12,11 @@ urlpatterns = [
     url(r'^conditions/$', views.Conditions.as_view(), name='conditions'),
     url(r'^registration/$', views.registration_view, name='registration'),
     url(r'author/add/$', views.advert_create, name='advert-add'),
+    url(r'^login/$', views.login_view, name='login'),
+    url(r'^userprofile/$', views.UserProfilesViews.as_view(), name='profile'),
+    url(r'^logout/$', views.logout_view, name='logout2'), #  для кастомизации нужно вызывать раньше, чем ауф.юрлс
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', views.login_view, name='login')
     ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
