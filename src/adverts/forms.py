@@ -18,22 +18,19 @@ class UserRegistrationForm(forms.ModelForm):
         model = User
         fields = ['username', 'password', 'password2', 'email']
 
-
-    def clean_username(self): # эта функция проверяет не используется ли уже имя пользователя
+    def if_username_exists(self): # эта функция проверяет не используется ли уже имя пользователя
         username = self.cleaned_data['username'] # переменная принимает параметр имя пользователя после получения формы
         if User.objects.exclude(pk=self.instance.pk).filter(username=username).exists(): # проверяется по праймари кейс и если такой же как уже существующий
             raise forms.ValidationError(u'Username "%s" is already in use.' % username)  # то райзится ошибка юзернейм уже используется
         return username
 
-
-    def clean_email(self): # эта функция проверяет не используется ли уже адрес почты
+    def if_email_exists(self): # эта функция проверяет не используется ли уже адрес почты
         email = self.cleaned_data['email'] # переменная принимает параметр email после получения формы
         if User.objects.exclude(pk=self.instance.pk).filter(email=email).exists(): # проверяется по праймари кейс и если такой же как уже существующий
-            raise forms.ValidationError(u'Username "%s" is already in use.' % email)  # то райзится ошибка email уже используется
+            raise forms.ValidationError(u'email "%s" is already in use.' % email)  # то райзится ошибка email уже используется
         return email
 
-
-    def clean_password(self):
+    def if_password_didnt_match(self):
         cleaned_data = super(UserRegistrationForm, self).clean() # метод возвращает данные в словарь
         if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data: # проверка есть ли данные из нужных нам полей в словаре
             if self.cleaned_data['password'] != self.cleaned_data['password2']: # если пароли не совпадают
