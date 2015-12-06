@@ -38,6 +38,8 @@ def registration_view(request):
     form = UserRegistrationForm(request.POST or None)
     if form.is_valid():
         form.save()
+        user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        login(request, user)
         return HttpResponseRedirect(reverse('profile'))
     return render(request, 'adverts/registration.html', {'form': form})
 
@@ -60,10 +62,10 @@ def edit_user_profiles_view(request):
     user = request.user #пользователь для изменения = запросить пользователя
     form = EditUsersProfilesForm(request.POST or None) #форма из формс.пай
     if form.is_valid(): #если форма валидна
-        user.first_name = request.POST['first_name'] #first_name объекта юзер изменяется на то что поучаем в ПОСТ
-        user.last_name = request.POST['last_name']
-        user.email = request.POST['email']
-        user.phone = request.POST['phone']
+        user.first_name = request.POST['first_name'].strip() or user.first_name #first_name объекта юзер изменяется на то что поучаем в ПОСТ
+        user.last_name = request.POST['last_name'].strip() or user.last_name #.strip() костыль для того, чтобы не перезаписывались пустые поля
+        user.email = request.POST['email'].strip() or user.email
+        user.phone = request.POST['phone'].strip() or user.phone
         user.save()
         return HttpResponseRedirect(reverse('profile'))
     return render(request, 'adverts/userprofile.html', {'form': form})

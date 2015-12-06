@@ -52,7 +52,7 @@ class UserLoginForm(forms.Form):  # сырая форма
 
 
 class EditUsersProfilesForm(forms.Form):
-    first_name = forms.CharField(label=_(u'first name'), max_length=30)
-    last_name = forms.CharField(label=_(u'last name'), max_length=30)
-    email = forms.CharField(label=_(u'mail'), max_length=30)
-    phone = forms.CharField(label=_(u'phone'), max_length=30)
+    first_name = forms.CharField(label=_(u'first name'), max_length=30, required=False)
+    last_name = forms.CharField(label=_(u'last name'), max_length=30, required=False)
+    email = forms.CharField(label=_(u'mail'), max_length=30, required=False)
+    phone = forms.CharField(label=_(u'phone'), max_length=30, required=False)
