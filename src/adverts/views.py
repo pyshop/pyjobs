@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response, get_object_or_404
+from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from django.views.generic import View, FormView, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -41,7 +41,7 @@ def advert_create(request):
     form = AdvertForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('home'))
+        return redirect(reverse('home'))
     return render(request, 'adverts/advert_form.html', {'form': form})
 
 
@@ -51,8 +51,10 @@ def registration_view(request):
         username = form.cleaned_data['username']
         email = form.cleaned_data['email']
         email_utf = email.encode('utf-8')
+        salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
+        salt_utf = salt.encode('utf-8')
         user = form.save()
-        user.activation_key = hashlib.sha1(email_utf).hexdigest()
+        user.activation_key = hashlib.sha1(email_utf + salt_utf).hexdigest()
         #user.key_expires = datetime.datetime.today() + datetime.timedelta(hours=2)
         user.save()
         email_subject = 'Подтверждение регистрации'
@@ -60,7 +62,7 @@ def registration_view(request):
                      " перейдите по этой ссылке: http://127.0.0.1:8010/confirm/%s" % (username, user.activation_key)
         send_mail(email_subject, email_body, 'anussebedernipes@yandex.ru',
                         [email], fail_silently=False)
-        return HttpResponseRedirect(reverse('register-success'))
+        return redirect(reverse('register-success'))
     return render(request, 'adverts/registration.html', {'form': form})
 
 
@@ -70,33 +72,33 @@ def login_view(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user.is_active:
             login(request, user)
-            return HttpResponseRedirect(reverse('profile'))
+            return redirect(reverse('profile'))
         else:
-            return HttpResponseRedirect(reverse('profile'))
+            return redirect(reverse('profile'))
     return render(request, 'registration/login.html', {'form': form})
 
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('home'))
+    return redirect(reverse('home'))
 
 
 def edit_user_profiles_view(request):
     user = request.user
     form = EditUserProfileForm(request.POST or None)
     if form.is_valid():
-        user.first_name = request.POST['first_name'].strip() or user.first_name
-        user.last_name = request.POST['last_name'].strip() or user.last_name
-        user.email = request.POST['email'].strip() or user.email
-        user.phone = request.POST['phone'].strip() or user.phone
+        user.first_name = request.POST['first_name']
+        user.last_name = request.POST['last_name']
+        user.email = request.POST['email']
+        user.phone = request.POST['phone']
         user.save()
-        return HttpResponseRedirect(reverse('profile'))
+        return redirect(reverse('profile'))
     return render(request, 'adverts/userprofile.html', {'form': form})
 
 
 def register_confirmation(request, activation_key):
     if request.user.is_authenticated():
-        HttpResponseRedirect('home')
+        return redirect(reverse('home'))
     user_check_token = get_object_or_404(User, activation_key=activation_key)
     # if user_profile.key_expires < datetime.datetime.now():
     #     return render_to_response('adverts/registration_link_expired.html')

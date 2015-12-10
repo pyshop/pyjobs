@@ -19,8 +19,9 @@
         <p>Фамилия: {{ user.last_name }}</p>
         <p>Телефон: {{ user.phone }}</p>
     </div>
-    <div class="container">
+    <div>
         <h1>Редактировать</h1>
+        <p>Незаполненные данные не сохраняются и не отображаются.</p>
         <form method="POST" action="" class="">
             {% csrf_token %}
             {{ form.as_p }}

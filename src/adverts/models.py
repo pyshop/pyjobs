@@ -51,7 +51,7 @@ class Advert(TimeStampedModel):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def __str__(self):
         return self.title
