@@ -4,5 +4,20 @@
 
 {% block content %}
     <h1>Контакты</h1>
-    <p>Информация о нас.</p>
+    <p>Напишите нам.</p>
+
+   {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="/thanks/" method="post">{% csrf_token %}
+        <p>Тема: <input type="text" name="subject"></p>
+        <p>Ваша почта: <input type="text" name="email"></p>
+        <p>Ваше сообщение: <textarea name="message" rows="10" cols="50"></textarea></p>
+        <input type="submit" value="Отправить!">
+    </form>
 {% endblock %}

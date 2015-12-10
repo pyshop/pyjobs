@@ -3,6 +3,9 @@
 {% block title %}Профайл пользователя{% endblock %}
 
 {% block content %}
+{% if not user.is_active %}
+<h2>Аккаунт не активирован</h2>
+{% endif %}
 {% if user.is_anonymous %}
 <h2>Необходимо залогиниться</h2>
 {% endif %}

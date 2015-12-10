@@ -139,3 +139,11 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'adverts.User'
 AUTH_PROFILE_MODULE = 'accounts.UsersProfiles'
+
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = "anussebedernipes@yandex.ru"
+EMAIL_HOST_PASSWORD = "djangotest88"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL  = 'anussebedernipes@yandex.ru'
+EMAIL_USE_TLS = True

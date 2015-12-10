@@ -14,6 +14,9 @@ urlpatterns = [
     url(r'author/add/$', views.advert_create, name='advert-add'),
     url(r'^login/$', views.login_view, name='login'),
     url(r'^userprofile/$', views.edit_user_profiles_view, name='profile'),
+    url(r'^registersuccess/', views.RegisterSuccess.as_view(), name='register-success'),
+    url(r'^registerlinkexpired/', views.RegistrationLinkExpired.as_view(), name='register-link-expired'),
+    url(r'^confirm/(?P<activation_key>\w+)/$', views.register_confirmation, name='register-confirm'),
     url(r'^logout/$', views.logout_view, name='logout2'), #  для кастомизации нужно вызывать раньше, чем ауф.юрлс
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),

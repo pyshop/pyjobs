@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.models import AbstractUser
 from pyjobs import settings
 from django_extensions.db.models import TimeStampedModel
+import datetime
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -11,6 +13,8 @@ class User(AbstractUser):
         verbose_name_plural = 'пользователи'
 
     phone = models.CharField('номер телефона', max_length=127, blank=True)
+    activation_key = models.CharField(max_length=40, blank=True)
+    # key_expires = models.DateTimeField(default=datetime.date.today())
 
     @models.permalink
     def get_absolute_url(self):
@@ -46,8 +50,8 @@ class Advert(TimeStampedModel):
         return 'advert-detail', (self.pk,)
 
 
-class UsersProfiles(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL) # подробно на русском тут http://habrahabr.ru/post/74967/
+class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
 
     def __str__(self):
         return self.title
