@@ -38,8 +38,16 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
 
+    #'django-mailer',
+    'celery',
+
     'adverts',
 )
+
+# redis settings
+BROKER_URL = 'redis://localhost/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

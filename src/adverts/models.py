@@ -13,7 +13,7 @@ class User(AbstractUser):
         verbose_name_plural = 'пользователи'
 
     phone = models.CharField('номер телефона', max_length=127, blank=True)
-    activation_key = models.CharField(max_length=40, blank=True)
+    # activation_key = models.CharField(max_length=40, blank=True)
     # key_expires = models.DateTimeField(default=datetime.date.today())
 
     @models.permalink
@@ -50,9 +50,9 @@ class Advert(TimeStampedModel):
         return 'advert-detail', (self.pk,)
 
 
-class UserProfile(models.Model):
+class UserActivationKey(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    activation_key = models.CharField(max_length=40, blank=True)
 
     def __str__(self):
-        return self.title
-
+        return self.user.username

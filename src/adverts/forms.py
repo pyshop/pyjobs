@@ -1,5 +1,5 @@
 from django import forms
-from .models import Advert, User, UserProfile
+from .models import Advert, User, UserActivationKey
 
 
 class AdvertForm(forms.ModelForm):
@@ -15,18 +15,6 @@ class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password', 'password2', 'email']
-
-    def if_username_exists(self):
-        username = self.cleaned_data['username']
-        if User.objects.exclude(pk=self.instance.pk).filter(username=username).exists():
-            raise forms.ValidationError('Username "%s" is already in use.' % username)
-        return username
-
-    def if_email_exists(self):
-        email = self.cleaned_data['email']
-        if User.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
-            raise forms.ValidationError('email "%s" is already in use.' % email)
-        return email
 
     def if_password_didnt_match(self):
         cleaned_data = super(UserRegistrationForm, self).clean()
