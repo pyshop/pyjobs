@@ -1,4 +1,6 @@
 import os
+import djcelery
+djcelery.setup_loader()
 
 
 def dirup( path, steps ):
@@ -38,16 +40,25 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
 
-    #'django-mailer',
+    'mailer',
     'celery',
+    'djcelery',
 
     'adverts',
 )
 
 # redis settings
-BROKER_URL = 'redis://localhost/0'
+BROKER_URL = 'redis://localhost:6379/0'
+BROKER_TRANSPORT = 'redis'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour
-
+# храним результаты выполнения задач так же в redis
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+# в течение какого срока храним результаты, после чего они удаляются
+CELERY_TASK_RESULT_EXPIRES = 7*86400  # 7 days
+# это нужно для мониторинга наших воркеров
+CELERY_SEND_EVENTS = True
+# место хранения периодических задач (данные для планировщика)
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

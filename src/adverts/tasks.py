@@ -1,7 +1,11 @@
-from celery import Celery
+from celery.task import periodic_task  # декораторы теперь следует импортировать из celery.task
+from mailer.engine import send_all
+from datetime import timedelta
 
-# app = Celery('tasks', broker='redis://localhost/0')
+# this will run every 60 seconds
+# send all emails in the mailer queue
 
-@app.task
-def add(x, y):
-    return x + y
+
+@periodic_task(run_every=timedelta(seconds=60))
+def email_tasks():
+    send_all()
