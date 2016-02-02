@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="container">
+        <h1>{{ title }} IZ WORKIN</h1>
+
+        {% include 'adverts/messages_display.html' %}
+
+        <div>
+            {% for obj in objects_list %}
+            <div class="container">
+                <div class="col-md-4">
+                    <ul>
+                        <ul>{{ obj.salary }}</ul>
+                        <ul>{{ obj.city }}</ul>
+                        <ul>{{ obj.is_remote }}</ul> <!--надо иконки ОК и неОК-->
+                        <ul>{{ obj.timestamp }}</ul>
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <h2><a href="{% url 'advert_detail' id=obj.id %}"> {{ obj.title }}</a> в {{ obj.city }}</h2>
+                    <p>
+                        {{ obj.description }}
+                        <a href="{% url 'advert_detail' id=obj.id %}"> Подробнее...</a>
+                    </p>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

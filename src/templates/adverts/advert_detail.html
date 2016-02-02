@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head_title %} {{ instance.title }} | PyJobs {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+            <h2>{{ instance.title }}</h2> </br>
+            {{ instance.description }} </br>
+            {{ instance.requirements }} </br>
+            {{ instance.salary }} </br>
+            {{ instance.city }} </br>
+            {{ instance.distance }} </br>
+            {{ instance.timestamp }} </br>
+            {{ instance.id }}
+    </div>
+
+{% endblock %}

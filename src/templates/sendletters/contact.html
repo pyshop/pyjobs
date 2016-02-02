@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'adverts/messages_display.html' %}
+    <div class="container">
+    <div class="container col-md-6">
+        <h3>Напиши письмо!</h3>
+        <form method="POST" action="">{% csrf_token %}
+            {{form|crispy }}
+            <input class="btn btn-success" type="submit" value="Отправить!" />
+        </form>
+    </div>
+    </div>
+{% endblock %}
