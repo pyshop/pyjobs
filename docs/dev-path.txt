@@ -1,0 +1,31 @@
+To start a new project:
+    1. MaKe DIRectory for example "projects", CD to it.
+    2. MKDIR "urprojectname", cd to it.
+    3. Create virtual environment with python3: "virtualenv . --python=python3"
+    4. Activate it: source bin/activate
+    5. Install Django: pip install django
+    6. Start new project: django-admin.py startproject yourproject
+    7. Now you can start server: python manage.py runserver
+
+Тут мой английский исчерпал себя и я перешел на русский:
+
+Для начала надо составить схему.
+
+Проект:
+    PyJobs, сайт с резюме и вакансиями для питонистов и не только,
+созданный с целью облегчить поиск сотрудников или работы.
+
+Схема:
+    Пользователь
+        Регистрация (Создание)
+        Детали/Аккаунт (Чтение, изменение, удаление)
+
+    Объявление (python manage.py startapp adverts)
+        Создание V
+        Просмотр V
+        Изменение, удаление V
+
+    Рассылка
+        Подписка на рассылку без регистрации на сайте
+
+    Контактная форма
