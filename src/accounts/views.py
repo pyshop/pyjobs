@@ -50,7 +50,7 @@ def register_account_view(request):
         password = form.cleaned_data['password']
         new_user = User.objects.create_user(username, email, password)
         new_user.is_active = False
-        key = generate_activation_key(new_user)
+        key = generate_activation_key(email)
         UserActivationKey.objects.create(user=new_user, activation_key=key)
         new_user.save()
         send_registration_email(new_user, key)

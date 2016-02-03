@@ -18,8 +18,8 @@ def send_registration_email(user, key):
     send_mail(subject, message, from_email, [to_email], fail_silently=False)
 
 
-def generate_activation_key(new_user):
-        emailhash = new_user.email.encode('utf-8')
+def generate_activation_key(email):
+        emailhash = email.encode('utf-8')
         salt_to_str_to_utf = str(random.random()).encode('utf-8')
         new_salt = hashlib.sha1(salt_to_str_to_utf).hexdigest()[:18]
         new_salt_to_utf = new_salt.encode('utf-8')
