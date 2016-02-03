@@ -12,6 +12,12 @@
             {{ object.city }} </br>
             {{ object.distance }} </br>
             {{ object.timestamp }} </br>
+    <div>
+        <form action="" method="post">{% csrf_token %}
+        <p>Вы действительно хотите удалить "{{ object }}"?</p>
+        <input class="btn btn-success" type="submit" value="Удалить" />
+</form>
+    </div>
     </div>
 
 {% endblock %}

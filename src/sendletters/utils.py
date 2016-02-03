@@ -28,7 +28,7 @@ def send_email(subject, message, email):
     return send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 
 
-def send_email_to_user(user):
+def test_send_email_to_user(user):
     context = {
         "user": user.username
     }
@@ -43,7 +43,7 @@ def send_email_to_user(user):
 #     return send_mass_mail(datatuple)
 
 
-def send_mass_to_users():
+def test_send_mass_to_users():
     recipient_list = []
     for user in User.objects.all():
         recipient_list.append(user.email)

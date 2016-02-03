@@ -12,17 +12,17 @@
             <div class="container">
                 <div class="col-md-4">
                     <ul>
-                        <ul>{{ obj.salary }}</ul>
-                        <ul>{{ obj.city }}</ul>
-                        <ul>{{ obj.is_remote }}</ul> <!--надо иконки ОК и неОК-->
-                        <ul>{{ obj.timestamp }}</ul>
+                        <ul>Оплата: {{ obj.salary }}</ul>
+                        <ul>Город: {{ obj.city }}</ul>
+                        <ul>Удаленно: {{ obj.is_remote }}</ul> <!--надо иконки ОК и неОК-->
+                        <ul>Опубликовано: {{ obj.timestamp }}</ul>
                     </ul>
                 </div>
                 <div class="col-md-8">
-                    <h2><a href="{% url 'advert_detail' id=obj.id %}"> {{ obj.title }}</a> в {{ obj.city }}</h2>
+                    <h2>Требуется <a href="{% url 'advert_detail' pk=obj.pk %}">{{ obj.title }}</a> в город {{ obj.city }}</h2>
                     <p>
                         {{ obj.description }}
-                        <a href="{% url 'advert_detail' id=obj.id %}"> Подробнее...</a>
+                        <a href="{% url 'advert_detail' pk=obj.pk %}"> Подробнее...</a>
                     </p>
                 </div>
             </div>
