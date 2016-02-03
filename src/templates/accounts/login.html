@@ -5,12 +5,15 @@
 
 {% block content %}
     <div class="container">
-    <h3>{{ title }}</h3>
-    <div class="col-md-6">
-        <form method="POST" action="">{% csrf_token %}
-            {{form|crispy}}
-            <input class="btn btn-success" type="submit" value="Войти" />
-        </form>
-    </div>
+        {% include 'adverts/messages_display.html' %}
+        <h3>{{ title }}</h3>
+        <div class="col-md-6">
+            <form method="POST" action="">{% csrf_token %}
+                {{form|crispy}}
+                <input class="btn btn-success" type="submit" value="Войти" />
+            </form>
+        </div>
+        <div class="col-md-6">
+        </div>
     </div>
 {% endblock %}

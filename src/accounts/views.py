@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-import hashlib, random
+from django.contrib import messages
+from .utils import generate_activation_key
+
+
+# import hashlib
+# import random
 
 from .forms import LoginForm, RegisterForm
 from .models import User, UserActivationKey
@@ -21,15 +26,15 @@ def login_account_view(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                # TODO вставить сообщение что успешно залогинился
+                messages.success(request, "Привет %s!" % user.username)
                 return redirect('main')
             else:
-                pass # нужно активировать пользователя
+                messages.warning(request, "Кажется вы забыли активировать аккаунт!")
+                return redirect('login')
         else:
-            # TODO вставить сообщение что пользователя не существует
-            # Вообще это неправильно делать такой принудительный редирект
-            # возможно надо рейзить формеррор и давать ссылку на регистрацию
-            return redirect('register')
+            messages.warning(request, "Такого пользователя не существует!")
+            return redirect('login') # TODO надо научиться передавать контекст в случае какого-либо условия
+            # то есть если пользователя не существует, то рендерится шаблон 'login', но уже с ссылкой на регистрацию
     context = {
         "title": "Вход",
         "form": form
@@ -37,7 +42,6 @@ def login_account_view(request):
     return render(request, 'accounts/login.html', context)
 
 
-# TODO сообщение об успешной регистрации, сейчас после отправки формы ничего не происходит
 def register_account_view(request):
     form = RegisterForm(request.POST or None)
     if form.is_valid():
@@ -46,18 +50,13 @@ def register_account_view(request):
         password = form.cleaned_data['password']
         new_user = User.objects.create_user(username, email, password)
         new_user.is_active = False
-        # TODO убрать в отдельную функцию
-        # сгенерировать ключ для нового пользователя
-        emailhash = email.encode('utf-8')
-        salt_to_str_to_utf = str(random.random()).encode('utf-8')
-        new_salt = hashlib.sha1(salt_to_str_to_utf).hexdigest()[:18]
-        new_salt_to_utf = new_salt.encode('utf-8')
-        key = hashlib.sha1(emailhash + new_salt_to_utf).hexdigest()
+        key = generate_activation_key(request)
         UserActivationKey.objects.create(user=new_user, activation_key=key)
         new_user.save()
-        # TODO убрать в отдельную функцию
-        # отправить имейл для подтверждения активации
         send_registration_email(new_user, key)
+        messages.success(request, "Регистрация прошла успешно, ссылка для активации "
+                                  "отправлена на указанную электропочту!")
+        return redirect('main')
     context = {
         "title": "Регистрация",
         "form": form,
@@ -78,5 +77,5 @@ def register_confirmation_view(request, activation_key):
 
 def logout_account_view(request):
     logout(request)
-    # TODO вставить сообщение о разлогинивании
+    messages.success(request, "Вы больше не залогинены")
     return redirect('main')
