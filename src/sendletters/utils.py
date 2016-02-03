@@ -38,9 +38,9 @@ def send_email_to_user(user):
     send_email(subject, message, to_email)
 
 
-def send_mass_email(subject, message, recipient_list):
-    datatuple = ((subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list), )
-    return send_mass_mail(datatuple)
+# def send_mass_email(subject, message, recipient_list):
+#     datatuple = ((subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list), )
+#     return send_mass_mail(datatuple)
 
 
 def send_mass_to_users():
@@ -52,4 +52,7 @@ def send_mass_to_users():
         }
         subject = render_to_string('sendletters/email_templates/test_letter_subject.txt')
         message = render_to_string('sendletters/email_templates/test_letter.txt', context)
-        send_mass_email(subject, message, recipient_list)
+        # send_mass_email(subject, message, recipient_list)
+        atuple = (subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+        datatuple = (atuple, )
+        send_mass_mail(datatuple)

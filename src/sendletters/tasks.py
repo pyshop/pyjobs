@@ -1,6 +1,6 @@
 # from celery import Celery
 from pyjobs2.celery import app
-from sendletters.utils import send_test_email, send_mass_to_users
+from sendletters.utils import send_mass_to_users
 
 # app = Celery('tasks', broker='redis://localhost:6379/0')
 
