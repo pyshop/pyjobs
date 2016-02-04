@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load el_pagination_tags %}
+
 
 
 {% block content %}
@@ -9,7 +9,7 @@
         {% include 'adverts/messages_display.html' %}
 
         <div>
-        {% paginate objects_list %}
+
             {% for obj in objects_list %}
             <div class="container">
                 <div class="col-md-4">
@@ -32,12 +32,46 @@
             {% endfor %}
         </div>
         <div class="container text-center">
-            {% get_pages %}
-            Показаны записи
-            {{ pages.current_start_index }}-{{ pages.current_end_index }} из
-            {{ pages.total_count }}.
-            {# Just print pages to render the Digg-style pagination. #}
-            {{ pages }}
+            {% if is_paginated %}
+          <nav>
+            <ul class="pagination">
+              {% if page_obj.has_previous %}
+                <li>
+                  <a href="?page={{ page_obj.previous_page_number }}">
+                    <span>Назад</span>
+                  </a>
+                </li>
+              {% else %}
+                <li class="disabled">
+                  <a href="#">
+                    <span>Назад</span>
+                  </a>
+                </li>
+              {% endif %}
+
+              {% for page in paginator.page_range %}
+                <li {% if page == page_obj.number %}class="active"{% endif %}>
+                  <a href="?page={{ page }}">{{ page }}</a>
+                </li>
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+                <li>
+                  <a href="?page={{ page_obj.next_page_number }}">
+                    <span>Вперед</span>
+                  </a>
+                </li>
+              {% else %}
+                <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
+                  <a href="#">
+                    <span>Вперед</span>
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+                 {% endif %}
+
         </div>
     </div>
 {% endblock %}

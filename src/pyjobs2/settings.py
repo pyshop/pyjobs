@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import djcelery
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 djcelery.setup_loader()
 
@@ -52,7 +51,6 @@ INSTALLED_APPS = [
     #3rdpartyapps
     'crispy_forms',
     'djcelery',
-    'el_pagination',
     #myapps
     'adverts',
     'sendletters',
@@ -60,9 +58,6 @@ INSTALLED_APPS = [
     'tests',
 ]
 
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request',
-)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 

@@ -20,15 +20,15 @@ def send_registration_email(user, key):
 
 def generate_activation_key(email):
     '''
-    ключ генерируется шифрованием подсоленного хеша,
+    ключ генерируется шифрованием подсоленного адреса почты,
     в качестве соли используется результат метода random
     шифрованнный алгоритмом sha1
     :param email: user's email
     :return: activation key
     '''
-    emailhash = email.encode('utf-8')
+    email_utf = email.encode('utf-8')
     salt_to_str_to_utf = str(random.random()).encode('utf-8')
     new_salt = hashlib.sha1(salt_to_str_to_utf).hexdigest()[:18]
     new_salt_to_utf = new_salt.encode('utf-8')
-    key = hashlib.sha1(emailhash + new_salt_to_utf).hexdigest()
+    key = hashlib.sha1(email_utf + new_salt_to_utf).hexdigest()
     return key
