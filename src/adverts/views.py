@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
+# from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.messages.views import SuccessMessageMixin
+from el_pagination.views import AjaxListView
+
 from django.views.generic import (
     ListView,
     DetailView,
@@ -10,11 +12,11 @@ from django.views.generic import (
 
 
 from .models import Advert
-from .forms import AdvertCreateForm
+# from .forms import AdvertCreateForm
 # Create your views here.
 
 
-class AdvertsListView(ListView):
+class AdvertsListView(AjaxListView):
     model = Advert
     template_name = 'adverts/adverts_list.html'
 
@@ -53,11 +55,12 @@ class AdvertsDetailView(DetailView):
 #     return render(request, 'adverts/advert_detail.html', context)
 
 
-class AdvertsCreateView(CreateView):
+class AdvertsCreateView(SuccessMessageMixin, CreateView):
     model = Advert
     fields = ['title', 'description', 'requirements', 'salary', 'city', 'is_remote']
     success_url = '/adverts/'
     template_name = 'adverts/advert_create.html'
+    success_message = "Объявление опубликовано"
 
     def get_context_data(self, **kwargs):
         context = super(AdvertsCreateView, self).get_context_data(**kwargs)

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import djcelery
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
 djcelery.setup_loader()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -50,12 +52,17 @@ INSTALLED_APPS = [
     #3rdpartyapps
     'crispy_forms',
     'djcelery',
+    'el_pagination',
     #myapps
     'adverts',
     'sendletters',
     'accounts',
     'tests',
 ]
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -163,3 +170,4 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")  # for user's 
 
 
 AUTH_USER_MODEL = 'accounts.User'
+

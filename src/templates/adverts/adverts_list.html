@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
+{% load el_pagination_tags %}
 
 
 {% block content %}
     <div class="container">
-        <h1>{{ title }} IZ WORKIN</h1>
+        <h1>Все объявления</h1>
 
         {% include 'adverts/messages_display.html' %}
 
         <div>
+        {% paginate objects_list %}
             {% for obj in objects_list %}
             <div class="container">
                 <div class="col-md-4">
@@ -28,6 +30,14 @@
             </div>
 
             {% endfor %}
+        </div>
+        <div class="container text-center">
+            {% get_pages %}
+            Показаны записи
+            {{ pages.current_start_index }}-{{ pages.current_end_index }} из
+            {{ pages.total_count }}.
+            {# Just print pages to render the Digg-style pagination. #}
+            {{ pages }}
         </div>
     </div>
 {% endblock %}
