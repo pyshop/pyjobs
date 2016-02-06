@@ -10,6 +10,20 @@ TODO надо сделать разные функции для а) сбора �
 '''
 
 
+def send_email(subject, message, email):
+    return send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+
+#
+# def send_password_reset_link_to_user(email, token_generator):
+#     context = {
+#         "email": email,
+#         "token": token_generator,
+#     }
+#     subject = render_to_string('accounts/email_templates/password_reset_email_subject.txt')
+#     message = render_to_string('accounts/email_templates/password_reset_email_message.txt', context)
+#     to_email = email
+#     send_email(subject, message, to_email)
+
 # def send_test_email():
 #     maillist = {}
 #     for user in User.objects.all():
@@ -22,10 +36,6 @@ TODO надо сделать разные функции для а) сбора �
 #         message = render_to_string('sendletters/email_templates/test_letter.txt', context)
 #         from_mail = settings.DEFAULT_FROM_EMAIL
 #         send_mail(subject, message, from_mail, [email])
-
-
-def send_email(subject, message, email):
-    return send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 
 
 def test_send_email_to_user(user):

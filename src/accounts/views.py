@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import password_reset_confirm
 from django.contrib import messages
 from .utils import generate_activation_key
 
@@ -79,3 +81,5 @@ def logout_account_view(request):
     logout(request)
     messages.success(request, "Вы больше не залогинены")
     return redirect('main')
+
+
