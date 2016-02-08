@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'sendletters',
     'accounts',
     'tests',
+    'profiles',
 ]
 
 
