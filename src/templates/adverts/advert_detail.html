@@ -4,14 +4,24 @@
 
 {% block content %}
 
-    <div class="container">
-            <h2>{{ object.title }}</h2> </br>
-            {{ object.description }} </br>
-            {{ object.requirements }} </br>
-            {{ object.salary }} </br>
-            {{ object.city }} </br>
-            {{ object.distance }} </br>
-            {{ object.timestamp }} </br>
+<div class="container">
+    <div class="col-md-4">
+        <ul>
+            <ul>Оплата: {{ object.salary }}</ul>
+            <ul>Город: {{ object.city }}</ul>
+            <ul>Удаленно: {{ object.is_remote }}</ul> <!--надо иконки ОК и неОК-->
+            <ul>Опубликовано: {{ object.author }} </ul>
+            <ul>Дата: {{ object.timestamp }}</ul>
+        </ul>
     </div>
-
+    <div class="col-md-8">
+        <h2>Требуется <a href="{% url 'advert_detail' pk=object.pk %}">{{ object.title }}</a> в город {{ object.city }}</h2>
+        <p>
+            {{ object.description }}
+        </p>
+        <p>
+            {{ object.author }}
+        </p>
+    </div>
+</div>
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import User
 
 
 class Advert(models.Model):
@@ -17,6 +18,7 @@ class Advert(models.Model):
     is_remote = models.BooleanField(verbose_name="удаленно", default=False)
     timestamp = models.DateTimeField(verbose_name="дата публикации", auto_now=False,
                                      auto_now_add=True, null=True)
+    author = models.ForeignKey(User, verbose_name='автор вакансии', blank=True, null=True)
 
     def __str__(self):
         return self.title

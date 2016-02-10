@@ -13,6 +13,7 @@ from .models import Advert
 
 class AdvertsListView(ListView):
     model = Advert
+    queryset = Advert.objects.order_by('-timestamp')
     template_name = 'adverts/adverts_list.html'
     paginate_by = 10
     context_object_name = 'objects_list'
