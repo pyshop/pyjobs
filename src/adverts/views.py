@@ -1,4 +1,7 @@
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.core.exceptions import PermissionDenied
 from django.views.generic import (
     ListView,
     DetailView,
@@ -36,11 +39,18 @@ class AdvertsCreateView(SuccessMessageMixin, CreateView):
         return super(AdvertsCreateView, self).form_valid(form)
 
 
+@method_decorator(login_required, name='dispatch')
 class AdvertsUpdateView(UpdateView):
     model = Advert
     fields = ['title', 'description', 'requirements', 'salary', 'city', 'is_remote']
     success_url = '/adverts/'
     template_name = 'adverts/advert_create.html'
+
+    def get_object(self, queryset=None):
+        advert = super(AdvertsUpdateView, self).get_object()
+        if advert.author != self.request.user:
+            raise PermissionDenied()
+        return advert
 
 
 class AdvertsDeleteView(DeleteView):
