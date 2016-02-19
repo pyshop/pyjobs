@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container">
+    <h2>Поиск</h2>
+
+    <form method="get" action=".">
+        <table>
+            {{ form|crispy }}
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input class="btn btn-success" type="submit" value="Искать">
+                </td>
+            </tr>
+        </table>
+
+        {% if query %}
+            <h3>Результаты</h3>
+
+            {% for result in page.object_list %}
+                <p>
+                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                </p>
+            {% empty %}
+                <p>Ничего не найдено.</p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Назад{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Вперед &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

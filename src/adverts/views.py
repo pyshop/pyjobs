@@ -31,6 +31,10 @@ class AdvertsCreateView(SuccessMessageMixin, CreateView):
     template_name = 'adverts/advert_create.html'
     success_message = "Объявление опубликовано"
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(AdvertsCreateView, self).form_valid(form)
+
 
 class AdvertsUpdateView(UpdateView):
     model = Advert

@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^adverts/', include("adverts.urls")),
     url(r'^accounts/', include("accounts.urls")),
     url(r'^profiles/', include("profiles.urls")),
-    url(r'^contact/', send_contact_email_view, name='contact')
+    url(r'^contact/', send_contact_email_view, name='contact'),
+    url(r'^search/', include('haystack.urls')),
 ]
 
 if settings.DEBUG:

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     #3rdpartyapps
     'crispy_forms',
     'djcelery',
+    'haystack',
     #myapps
     'adverts',
     'sendletters',
@@ -59,6 +60,26 @@ INSTALLED_APPS = [
     'profiles',
 ]
 
+# HAYSTACK_CONNECTIONS = {
+#     'default': {
+#         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+#         'URL': 'http://127.0.0.1:9200/',
+#         'INDEX_NAME': 'haystack',
+#     },
+#     'autocomplete': {
+#         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+#         'URL': 'http://127.0.0.1:9200/',
+#         'INDEX_NAME': 'haystack',
+#     },
+# }
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+        # ...or for multicore...
+        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
+    },
+}
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
