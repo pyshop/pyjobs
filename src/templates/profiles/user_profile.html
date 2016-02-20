@@ -5,21 +5,30 @@
 
 <div class="container">
     <div class="col-md-6">
-        <h3>Профайл пользователя: {{ profile.user.username }}</h3>
+        <h3>Профайл пользователя: {{ user_profile.username }}</h3>
         <ul>
-            <ul>Юзернейм: {{ profile.user.username }}</ul>
-            <ul>Город: {{ profile.user.city }}</ul>
-            <ul>Предлагаю вакансии: {{ profile.user.is_recruiter }}</ul> <!--надо иконки ОК и неОК-->
-            <ul>Ищу работу: {{ profile.user.is_worker }}</ul>
-            <ul>Телефон: {{ profile.user.phone }}</ul>
+            <ul>Юзернейм: {{ user_profile.username }}</ul>
+            <ul>Город: {{ user_profile.location }}</ul>
+            <ul>Предлагаю вакансии: {{ user_profile.is_recruiter }}</ul> <!--надо иконки ОК и неОК-->
+            <ul>Ищу работу: {{ user_profile.is_worker }}</ul>
+            <ul>Телефон: {{ user_profile.phone }}</ul>
+            <ul>Электропочта: {{ user_profile.email_to_contact }}</ul>
+            <ul>Сайт: <a href="{{ user_profile.homepage }}">{{ user_profile.homepage }}</a></ul>
         </ul>
+        {% if user_profile.username == request.user.username %}
+        <p>
+            <a href="{% url 'profile_update' slug=user.username %}" class="btn btn-success" type="submit">Редактировать</a>
+        </p>
+        {% endif %}
     </div>
     <div class="col-md-6">
+
 {#        <h3>Сменить пароль</h3>#}
         <!--
         TODO тут надо вствить PasswordResetForm
         -->
     </div>
+
         <!--
         TODO раздел объявления, возможность управлять объявлениями
         -->

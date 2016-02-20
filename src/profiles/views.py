@@ -1,15 +1,33 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth import get_user_model
+from accounts.models import User
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
 
-from .models import UserProfile
-User = get_user_model()
-# Create your views here.
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    )
 
 
-def user_profile_view(request, username):
-    user = get_object_or_404(User, username=username)
-    profile, created = UserProfile.objects.get_or_create(user=user)
-    context = {
-        "profile": profile
-    }
-    return render(request, 'profiles/user_profile.html', context)
+class UserProfileDetails(DetailView):
+    model = User
+    template_name = 'profiles/user_profile.html'
+    context_object_name = 'user_profile'
+
+
+class UserProfileUpdate(UpdateView):
+    model = User
+    fields = ['location', 'phone', 'is_worker', 'is_recruiter', 'homepage', 'email_to_contact']
+    template_name = 'profiles/user_profile_update.html'
+    success_url = '/profiles/{slug}/'
+
+    def get_object(self, queryset=None):
+        profile = super(UserProfileUpdate, self).get_object()
+        if profile.username != self.request.user.username:
+            raise PermissionDenied()
+        return profile
+
+    # def get_success_url(self):
+    #     return redirect('profile', kwargs={'slug': 'request.user.username'})

@@ -11,9 +11,15 @@ class User(AbstractUser):
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
 
-    phone = models.CharField(verbose_name='номер телефона', max_length=120, blank=True)
-    is_worker = models.BooleanField(verbose_name='Ищу работу', default=False)
-    is_recruiter = models.BooleanField(verbose_name='Ищу работников', default=False)
+    location = models.CharField(max_length=120, verbose_name='город', blank=True, null=True, default='')
+    phone = models.CharField(verbose_name='номер телефона', max_length=120, blank=True, default='', null=True)
+    is_worker = models.BooleanField(verbose_name='ищу работу', default=False)
+    is_recruiter = models.BooleanField(verbose_name='ищу работников', default=False)
+    homepage = models.URLField(verbose_name='персональный сайт', default='', blank=True, null=True)
+    email_to_contact = models.EmailField(verbose_name='электропочта для связи',
+                                         help_text='может отличаться от указанной при регистрации',
+                                         max_length=120, default='', blank=True, null=True)
+    slug = models.SlugField(unique=True, null=True)
 
 
 class UserActivationKey(models.Model):

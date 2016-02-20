@@ -22,7 +22,7 @@
             <li><a href="/admin">Админ</a></li>
             {%  endif %}
             {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' username=user.username %}">{{user.username}} | Профайл</a></li>
+            <li><a href="{% url 'profile' slug=user.username %}">{{user.username}} | Профайл</a></li>
             <li><a href="{% url 'logout' %}">Выход</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Войти</a></li>

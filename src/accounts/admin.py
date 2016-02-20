@@ -6,8 +6,9 @@ from .models import User
 
 
 class UserModelAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'is_worker', 'is_recruiter', 'is_active', 'is_staff', 'date_joined']
-    search_fields = ['username', 'email', 'is_worker', 'is_recruiter', 'is_active', 'is_staff', 'date_joined']
+    list_display = ['username', 'email', 'is_active', 'is_staff', 'date_joined']
+    search_fields = ['username', 'email', 'is_active', 'is_staff', 'date_joined']
+    prepopulated_fields = {"slug": ("username",)}
 
 
 admin.site.register(User, UserModelAdmin)
