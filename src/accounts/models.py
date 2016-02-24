@@ -15,7 +15,9 @@ class User(AbstractUser):
     phone = models.CharField(verbose_name='номер телефона', max_length=120, blank=True, default='', null=True)
     is_worker = models.BooleanField(verbose_name='ищу работу', default=False)
     is_recruiter = models.BooleanField(verbose_name='ищу работников', default=False)
-    homepage = models.URLField(verbose_name='персональный сайт', default='', blank=True, null=True)
+    homepage = models.URLField(verbose_name='персональный сайт',
+                               help_text='http://example.com', default='',
+                               blank=True, null=True)
     email_to_contact = models.EmailField(verbose_name='электропочта для связи',
                                          help_text='может отличаться от указанной при регистрации',
                                          max_length=120, default='', blank=True, null=True)

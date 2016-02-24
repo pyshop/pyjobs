@@ -15,6 +15,7 @@ class UserProfileDetails(DetailView):
     model = User
     template_name = 'profiles/user_profile.html'
     context_object_name = 'user_profile'
+    
 
 
 class UserProfileUpdate(UpdateView):
