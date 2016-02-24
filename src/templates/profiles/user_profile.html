@@ -9,17 +9,25 @@
         <ul>
             <ul>Юзернейм: {{ user_profile.username }}</ul>
             <ul>Город: {{ user_profile.location }}</ul>
-            <ul>Предлагаю вакансии: {{ user_profile.is_recruiter }}</ul> <!--надо иконки ОК и неОК-->
-            <ul>Ищу работу: {{ user_profile.is_worker }}</ul>
+            {% if user_profile.is_recruiter == True %}
+                <ul>Предлагаю вакансии: <i class="fa fa-check"></i> </ul>
+            {% else %}
+                <ul>Предлагаю вакансии: <i class="fa fa-times"></i> </ul>
+            {%  endif %}
+            {% if user_profile.is_worker == True %}
+                <ul>Ищу работу: <i class="fa fa-check"></i></ul>
+            {% else %}
+                <ul>Ищу работу: <i class="fa fa-times"></i></ul>
+            {% endif %}
             <ul>Телефон: {{ user_profile.phone }}</ul>
             <ul>Электропочта: {{ user_profile.email_to_contact }}</ul>
             <ul>Сайт: <a href="{{ user_profile.homepage }}">{{ user_profile.homepage }}</a></ul>
+            {% if user_profile.username == request.user.username %}
+            <ul><a href="{% url 'profile_update' slug=user.username %}" class="btn btn-success" type="submit">Редактировать</a></ul>
+            {% endif %}
         </ul>
-        {% if user_profile.username == request.user.username %}
-        <p>
-            <a href="{% url 'profile_update' slug=user.username %}" class="btn btn-success" type="submit">Редактировать</a>
-        </p>
-        {% endif %}
+
+
     </div>
     <div class="col-md-6">
 
