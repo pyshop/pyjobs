@@ -9,7 +9,11 @@
         <ul>
             <ul>Оплата: {{ object.salary }}</ul>
             <ul>Город: {{ object.city }}</ul>
-            <ul>Удаленно: {{ object.is_remote }}</ul> <!--надо иконки ОК и неОК-->
+             {% if object.is_remote == True %}
+                <ul>Удаленно: <i class="fa fa-check"></i></ul>
+            {% else %}
+                <ul>Удаленно: <i class="fa fa-times"></i></ul>
+            {% endif %}
             <ul>Опубликовано: {{ object.author }} </ul>
             <ul>Дата: {{ object.timestamp }}</ul>
         </ul>

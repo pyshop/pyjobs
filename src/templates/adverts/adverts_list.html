@@ -17,7 +17,11 @@
                     <ul>
                         <ul>Оплата: {{ obj.salary }}</ul>
                         <ul>Город: {{ obj.city }}</ul>
-                        <ul>Удаленно: {{ obj.is_remote }}</ul> <!--надо иконки ОК и неОК-->
+                        {% if obj.is_remote == True %}
+                            <ul>Удаленно: <i class="fa fa-check"></i></ul>
+                        {% else %}
+                            <ul>Удаленно: <i class="fa fa-times"></i></ul>
+                        {% endif %}
                         <ul>Опубликовано: {{ obj.author }} </ul>
                         <ul>Дата: {{ obj.timestamp }}</ul>
                     </ul>
