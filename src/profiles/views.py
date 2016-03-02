@@ -1,6 +1,7 @@
 from accounts.models import User
 from adverts.models import Advert
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect
 
 from django.views.generic import (

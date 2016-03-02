@@ -9,17 +9,9 @@
             <form method="POST" action="">{% csrf_token %}
                 {{form|crispy}}
                 <input class="btn btn-success" type="submit" value="Внести изменения" />
+                <a href="{% url 'password_reset' %}" class="btn btn-warning">Сменить пароль</a>
             </form>
     </div>
-    <div class="col-md-6">
-{#        <h3>Сменить пароль</h3>#}
-        <!--
-        TODO тут надо вствить PasswordResetForm
-        -->
-    </div>
 
-        <!--
-        TODO раздел объявления, возможность управлять объявлениями
-        -->
 </div>
 {% endblock %}

@@ -34,7 +34,7 @@ def login_account_view(request):
                 messages.warning(request, "Кажется вы забыли активировать аккаунт!")
                 return redirect('login')
         else:
-            messages.warning(request, "Такого пользователя не существует!")
+            messages.warning(request, "Кажется что-то пошло не так! Попробуйте еще раз.")
             return redirect('login') # TODO надо научиться передавать контекст в случае какого-либо условия
             # то есть если пользователя не существует, то рендерится шаблон 'login', но уже с ссылкой на регистрацию
     context = {

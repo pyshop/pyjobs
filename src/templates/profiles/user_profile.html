@@ -29,12 +29,13 @@
 
 
     </div>
+
     <div class="col-md-6">
         <h3>Объявления пользователя:</h3>
         {% if adverts %}
         <ul>
             {% for x in adverts %}
-                <ul><a href="{% url 'advert_detail' pk=x.pk %}">{{ x.title }}</a></ul>
+                <li><a href="{% url 'advert_detail' pk=x.pk %}">{{ x.title }}</a> {% if user_profile.username == request.user.username %}| <a href="{% url 'advert_update' pk=x.pk %}" style="text-decoration: underline; font-style: italic; font-size: 12px">редактировать</a></li>{% endif %}
             {% endfor %}
         </ul>
         {% endif %}

@@ -27,7 +27,7 @@
                     </ul>
                 </div>
                 <div class="col-md-8">
-                    <h2>Требуется <a href="{% url 'advert_detail' pk=obj.pk %}">{{ obj.title }}</a> в город {{ obj.city }}</h2>
+                    <h2><a href="{% url 'advert_detail' pk=obj.pk %}">{{ obj.title }}</a> в город {{ obj.city }}</h2>
                     <p>
                         {{ obj.description }}
                         <a href="{% url 'advert_detail' pk=obj.pk %}"> Подробнее...</a>
