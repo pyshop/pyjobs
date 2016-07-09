@@ -12,8 +12,12 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import djcelery
+from django_before import make_subpather, make_json_settings_reader
 
 djcelery.setup_loader()
+
+subroot = make_subpather(__file__, 3)
+secrets = make_json_settings_reader(subroot('conf/secrets.json'))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6fr)00k&yzm_6kyx=238kvsj4=&5+=h!x-vn!a=zd#bp0j&rq0'
+SECRET_KEY = secrets['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,7 +35,7 @@ DEBUG = True
 EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = "587"
 EMAIL_HOST_USER = "anussebedernipes@yandex.ru"
-EMAIL_HOST_PASSWORD = "moinomer359"
+EMAIL_HOST_PASSWORD = secrets['EMAIL_HOST_PASSWORD']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'anussebedernipes@yandex.ru'
 EMAIL_USE_TLS = True
@@ -133,8 +137,12 @@ WSGI_APPLICATION = 'pyjobs2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pyjobs_db',
+        'USER': 'pyjobs_user',
+        'PASSWORD': secrets['DATABASE_PASSWORD'],
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
